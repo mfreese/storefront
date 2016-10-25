@@ -38,15 +38,28 @@ description: "Multi-layered modular service-desk",
 price: 9984>,
 #<Item:0x007ffabcb3d328
 
-
-
 What's the cheapest book?
   Item.where(category: "Books").order(price: :asc).limit(1)
   Ergonomic Granite Chair"
 
 Who lives at "6439 Zetta Hills, Willmouth, WY"? Do they have another address?
+
+
 Correct Virginie Mitchell's address to "New York, NY, 10108".
+
 How much would it cost to buy one of each tool?
+Item.where(category: "Tools").sum("price")
+ 7383
+
 How many total items did we sell?
+  Order.sum("quantity")
+  2125
+  
 How much was spent on books?
+sum=Item.where(category: "Books").collect do |item|
+   item.price * item.order.sum(:quantity)  
+   pry(main)* end
+   sum.inject("+")
+   420566
+
 Simulate buying an item by inserting a User for yourself and an Order for that User.
