@@ -40,26 +40,31 @@ price: 9984>,
 
 What's the cheapest book?
   Item.where(category: "Books").order(price: :asc).limit(1)
-  Ergonomic Granite Chair"
+    Ergonomic Granite Chair"
 
 Who lives at "6439 Zetta Hills, Willmouth, WY"? Do they have another address?
+  Corrine Little
+   Address.find_by(street: "6439 Zetta Hills").user
 
 
 Correct Virginie Mitchell's address to "New York, NY, 10108".
+  user = User.find_by('first_name' => 'Virginie', 'last_name' => 'Mitchell')
+    user.address.update.(city: 'New York', state: 'NY', zip: '10108')
+
 
 How much would it cost to buy one of each tool?
 Item.where(category: "Tools").sum("price")
- 7383
+  7383
 
 How many total items did we sell?
   Order.sum("quantity")
-  2125
-  
+    2125
+
 How much was spent on books?
 sum=Item.where(category: "Books").collect do |item|
    item.price * item.order.sum(:quantity)  
-   pry(main)* end
-   sum.inject("+")
+    pry(main)* end
+      sum.inject("+")
    420566
 
 Simulate buying an item by inserting a User for yourself and an Order for that User.
