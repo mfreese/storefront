@@ -23,5 +23,19 @@ class ItemsController < ApplicationController
     render :new
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    @item.title = params[:item][:title]
+    @item.description = params[:item][:description]
+    @item.category = params[:item][:category]
+    @item.price = params[:item][:price]
+    @item.save
+    redirect_to root_path
+  end
+
 
 end
